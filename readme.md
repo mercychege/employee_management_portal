@@ -1,4 +1,4 @@
-#Human Resource management Portal
+# Human Resource management Portal
 
 A basic system to manage employee information and allow employees make leave applications.
 
