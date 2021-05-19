@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block title %}Position Creation{% endblock title %}
+
+{% block main %}
+<main>
+    <h1>Create New Position</h1>    
+{% if submitted %}
+    <p class="success">
+        New Position has been created. Thank you.
+    </p>
+
+{% else %}   
+    <form action="" enctype="multipart/form-data" method="post" novalidate>
+        {% for message in messages %}
+			<p id="messages">{{message}}</p>
+	    {% endfor%}
+        <div class="wrap-collabsible"> 
+            <input id="collapsible" class="toggle" type="checkbox" checked="">
+            <label for="collapsible" class="lbl-toggle" tabindex="0">Position Details</label>
+            <div class="collapsible-content">
+                <div class="content-inner">                  
+                    <table>  
+                         <tr>
+                            
+                            <td>{{ form.department.label  }}</td>
+                            <td>{{ form.department }}&nbsp;
+								{{ form.department.errors }}
+							</td>
+                        </tr>                           
+                        <tr>
+                            
+                            <td>{{ form.name.label  }}</td>
+                            <td>{{ form.name }}&nbsp;
+								{{ form.name.errors }}
+							</td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.description.label}}</td>
+                            <td>{{ form.description }}&nbsp;
+								{{ form.description.errors }}
+							</td>
+                        </tr>                        
+                     
+                                               
+                    </table> 
+					
+                </div>
+            </div>    
+        </div>	            
+        <div class="card-header">
+            <button type="submit">Submit</button>
+        </div>
+         
+        {% csrf_token %}
+    </form> 
+    
+
+{% endif %}
+
+</main>
+
+{% endblock main %}
+
+
+ 

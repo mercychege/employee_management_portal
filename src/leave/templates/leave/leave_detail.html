@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block title %}Leave Details{% endblock title %}
+
+{% block main %}
+<main>
+    
+    <div class="wrap-collabsible"> 
+        <input id="collapsible" class="toggle" type="checkbox" checked="">
+        <label for="collapsible" class="lbl-toggle" tabindex="0">Leave Details</label>
+        <div class="collapsible-content">
+            <div class="content-inner">                  
+                <table>                             
+                    <tr>
+                        
+                        <td>Employee Username: </td>
+                        <td>{{ leave.username }}</td>
+                    </tr>
+                    <tr>
+                        <td> Start Date: </td>
+                        <td>{{ leave.startdate }}</td>
+                    </tr> 
+                    <tr>
+                        <td> End Date: </td>
+                        <td>{{ leave.enddate }}
+                        </td>
+                    </tr> 
+                     <tr>
+                        <td> Duration:</td>
+                        <td>{{ leave.leave_days }}</td>
+                    </tr> 
+                    <tr>                           
+                        <td> Leave Type: </td>
+                        <td>{{ leave.leavetype }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Reason:</td>
+                        <td>{{ leave.reason }}    
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td> Reliever:</td>
+                        <td>{{ leave.relievername }}    
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td> Status:</td>
+                        <td>{{ leave.status }}    
+                        </td>
+                    </tr>  
+                                            
+                </table>  
+                <section class="row">
+                <section class="col col-lg-4 col-sm-12 col-lg-offset-7 text-center">
+                <div class="buttons-link">
+                    {% if request.user.is_superuser and request.user.is_staff %} 
+                        {%if leave.leave_approved %}
+                            <a href="{% url 'unapprove' leave.id %}"><button>UNAPPROVE</button>
+                        </a>
+                        {% else %}
+                            <a href="{% url 'approve' leave.id %}"><button>APPROVE</button>
+                        </a>
+                        {% endif %}
+                        {%if leave.is_cancelled %}
+                            <a href="{% url 'uncancel' leave.id %}"><button>UNCANCEL</button>
+                        </a>
+                        {% else %}
+                            <a href="{% url 'cancel' leave.id %}"><button>CANCEL</button></a>
+                        {% endif %}
+                        {%if leave.is_rejected %}
+                            <a href="{% url 'unreject' leave.id %}"><button>UNREJECT</button></a>
+                        {% else %}    
+                            <a href="{% url 'reject' leave.id %}"><button>REJECT</button></a>
+                        {% endif %}
+                    {% else %}
+                        {%if leave.is_cancelled %}
+                            <a href="{% url 'uncancel' leave.id %}"><button>UNCANCEL</button>
+                        </a>
+                        {% else %}
+                            <a href="{% url 'cancel' leave.id %}"><button>CANCEL</button></a>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                </section>
+                </section> 
+            </div>
+        </div>    
+    </div>	     
+    
+    <div class="btns">
+        <a href="../pending/all/"><button>Back <span class="las la-arrow-right"></span></button></a>
+    </div>
+      
+</main>
+
+{% endblock main %}
+
+
+ 

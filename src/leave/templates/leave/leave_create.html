@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block title %}Leave Application{% endblock title %}
+
+{% block main %}
+<main>
+      
+{% if submitted %}
+    <p class="success">
+        Your leave request has been created and sent for approval.
+    </p>
+
+{% else %}   
+    <form action="" enctype="multipart/form-data" method="post" novalidate>
+        {% for message in messages %}
+			<p id="messages">{{message}}</p>
+	    {% endfor%}
+        <div class="wrap-collabsible"> 
+            <input id="collapsible" class="toggle" type="checkbox" checked="">
+            <label for="collapsible" class="lbl-toggle" tabindex="0">Leave Application Form</label>
+            <div class="collapsible-content">
+                <div class="content-inner">                  
+                    <table>
+                        {{ form.as_table }}                           
+                    </table>   
+                </div>  
+            </div>
+        </div>
+        <div class="card-header">
+            <button type="submit">Submit</button>
+        </div>
+         
+        {% csrf_token %}
+    </form> 
+    
+
+{% endif %}
+
+ 
+</main>
+
+{% endblock main %}
+
+
+ 

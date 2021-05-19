@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block title %}Employee Birthdays{% endblock title %}
+
+{% block main %}
+<main>
+      <div class="cards">
+                {% if request.user.is_superuser and request.user.is_staff %}                
+                <div class="card-info">
+                    <a href="/employees/all" >                   
+                    <div>
+                       <h1>{{all_employees.count}}</h1> 
+                       <span>Employees</span>
+                    </div>
+                    <div>
+                        <span class="las la-users"></span>
+                    </div>
+                    </a>
+                </div>    
+                <div class="card-info">
+                    <a href="/leave/pending/all" >
+                    <div>
+                        <h1>{{all_leaves.count}}</h1> 
+                        <span>Leave Applications</span>
+                    </div>
+                    <div>
+                        <span class="las la-file-alt"></span>
+                    </div>
+                    </a>
+                </div>
+                <div class="card-info">
+                    <a href="/employees/birthdays" class="active">
+                    <div>
+                        <h1>{{employees_birthday.count}}</h1> 
+                        <span>Birthdays</span>
+                    </div>
+                    <div>
+                        <span class="las la-gift"></span>
+                    </div>
+                    </a>
+                </div>
+                <div class="card-info">
+                    <a href="">
+                    <div>
+                        <h1>Ksh.6M</h1> 
+                        <span>Net Income</span>
+                    </div>
+                    <div>
+                        <span class="las la-money-bill-wave"></span>
+                    </div>
+                    </a>
+                </div>
+                {% else %}  
+                <div class="card-info">                    
+                    <a href="/employees/profile" >
+                    <div>                        
+                        <h1>1</h1> 
+                        <span>User Profile</span>
+                    </div>
+                    <div>
+                        <span class="las la-user-circle"></span>
+                    </div>
+                    </a>
+                </div>              
+                <div class="card-info">                    
+                    <a href="/leave/pending/all" >
+                    <div>                        
+                        <h1>{{staff_leaves.count}}</h1> 
+                        <span>Leave Applications</span>
+                    </div>
+                    <div>
+                        <span class="las la-file-alt"></span>
+                    </div>
+                    </a>
+                </div>
+                <div class="card-info">
+                     <a href="/employees/birthdays" class="active">
+                    <div>
+                        <h1>{{employees_birthday.count}}</h1> 
+                        <span>Birthdays</span>
+                    </div>
+                    <div>
+                        <span class="las la-gift"></span>
+                    </div>
+                    </a>
+                </div>
+                <div class="card-info">
+                    <a href="">
+                    <div>
+                        <h1>Ksh.1M</h1> 
+                        <span>Net Income</span>
+                    </div>
+                    <div>                    
+                        <span class="las la-money-bill-wave"></span>
+                    </div>
+                    </a>
+                </div>
+                {% endif %}
+        </div>
+    <div class="employee-grid">
+        <div class="projects">
+            <div class="card">
+                <div class="card-header">
+                <h3>Birthdays in {{ month}}</h3>
+
+                <button>See all <span class="las la-arrow-right"></span></button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        {% if employees_birthday %}
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <td>Employee Name</td>
+                                    <td>Department</td>                                                               
+                                    <td>Position</td>                                
+                                    <td> Birth date </td>
+                                    <td> Celebration</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for employee in employees_birthday %}
+                                <tr>                   
+                                    
+                                    <td> {{employee.get_full_name}}</td>
+                                    <td> {{employee.department}}</td>                                
+                                    <td> {{employee.position}}</td>  
+                                    <td> {{employee.get_pretty_birthday}}</td> 
+                                    
+                                    {% if employee.birthday_today %}  
+                                    <td>Happy Birthday!!</td>
+
+                                    {% elif employee.days_check_date_fade %}
+                                        <td>celebrated</td>
+
+                                    {% else %}
+                                        <td>{{ employee.birthday_counter}}</td>
+                                    
+                                    {% endif %}
+                                    
+                                
+                                </tr>
+                                {% endfor%}  
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <span>No Birthdays can be found this month.</span>
+                        
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </main>
+{% endblock main %}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block title %}Employee Details{% endblock title %}
+
+{% block main %}
+<main>
+    <h1>Employee Details</h1>    
+     {% for message in messages %}
+			<p id="messages">{{message}}</p>
+	    {% endfor%}
+    <div class="wrap-collabsible"> 
+        <input id="collapsible" class="toggle" type="checkbox" checked="">
+        <label for="collapsible" class="lbl-toggle" tabindex="0">Personal Information</label>
+        <div class="collapsible-content">
+            <div class="content-inner">                  
+                <table>                             
+                    <tr>
+                        
+                        <td>Employee Number: </td>
+                        <td>{{ employee.employeenumber }}</td>
+                    </tr>
+                    <tr>
+                        <td> Username: </td>
+                        <td>{{ employee.username }}</td>
+                    </tr> 
+                    <tr>
+                        <td> Image: </td>
+                        {% if employee.image %}
+                        <td><img src ="{{ employee.image.url }}" alt="" width="100"></td>
+                        {% else %}
+                        <td><img src ="{% static 'default.png' %}" alt="" width="100"></td>
+                        {% endif %}
+                    </tr>                     
+                    <tr>                           
+                        <td> First name: </td>
+                        <td>{{ employee.firstname }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Last name:</td>
+                        <td>{{ employee.lastname }}    
+                        </td>
+                    </tr>  
+                    <tr>
+                        <td> Other name:</td>
+                        <td>{{ employee.othername }}</td>
+                    </tr> 
+                    <tr>
+                        <td> Gender</td>
+                        <td>{{ employee.gender }}</td>
+                    </tr> 
+                    <tr>
+                        <td> Date of birth</td>
+                        <td>{{ employee.dateofbirth }}</td>
+                    </tr>
+                    <tr>
+                        <td> Marital status</td>
+                        <td>{{ employee.maritalstatus }}</td>
+                    </tr>                                         
+                </table>  
+            </div>
+        </div>    
+    </div>	     
+    
+    <div class="wrap-collabsible"> 
+        <input id="collapsible2" class="toggle" type="checkbox"> 
+        <label for="collapsible2" class="lbl-toggle" tabindex="0">Contact Information</label>
+        <div class="collapsible-content">
+            <div class="content-inner"> 
+                <table>                
+                <tr>
+                    <td>Address: </td>
+                    <td>{{ employee.address }}</td>
+                </tr>
+                <tr>
+                    <td> Post code: </td>
+                    <td>{{ employee.postcode }}</td>
+                </tr> 
+                <tr>
+                    <td> Current Residence: </td>
+                    <td>{{ employee.currentresidence }}</td>
+                </tr>
+                <tr>
+                    <td> Phone Number: </td>
+                    <td>{{ employee.phone }}</td>
+                </tr>
+                <tr>
+                    <td> Email:</td>
+                    <td>{{ employee.email }}</td>
+                </tr>
+                </table>              
+            </div>
+        </div>
+    </div>
+    <div class="wrap-collabsible"> 
+        <input id="collapsible3" class="toggle" type="checkbox">
+        <label for="collapsible3" class="lbl-toggle" tabindex="0">Employment Information</label>
+        <div class="collapsible-content">
+            <div class="content-inner">
+                <table>                
+                    <tr>
+                        <td>Department: </td>
+                        <td>{{ employee.department }}</td>
+                    </tr>
+                    <tr>
+                        <td> Position: </td>
+                        <td>{{ employee.position }}</td>
+                    </tr> 
+                    <tr>
+                        <td> ID Number: </td>
+                        <td>{{ employee.ID_No }}</td>
+                    </tr>
+                    <tr>
+                        <td> Passport Number: </td>
+                        <td>{{ employee.Passport_No }}</td>
+                    </tr>
+                    <tr>
+                        <td> NSSF Numnber: </td>
+                        <td>{{ employee.NSSF_No }}</td>
+                    </tr>
+                    <tr>
+                        <td> NHIF Number: </td>
+                        <td>{{ employee.NHIF_No }}</td>
+                    </tr>
+                    <tr>
+                        <td> KRA Number: </td>
+                        <td>{{ employee.KRA_No }}</td>
+                    </tr>
+                    <tr>
+                        <td> Employment Date: </td>
+                        <td>{{ employee.employmentdate }}</td>
+                    </tr>
+                    <tr>
+                        <td> Employment Type: </td>
+                        <td>{{ employee.employmenttype }}</td>
+                    </tr>
+                    <tr>
+                        <td> Termination Date: </td>
+                        <td>{{ employee.terminationdate }}</td>
+                    </tr>
+                </table>
+            </div>                      
+        </div>
+    </div>
+    <div class="wrap-collabsible"> 
+        <input id="collapsible4" class="toggle" type="checkbox">
+        <label for="collapsible4" class="lbl-toggle" tabindex="0">Bank Account Information</label>
+        <div class="collapsible-content">
+            <div class="content-inner">
+                <table>                
+                    <tr>
+                        <td>Employee Bank Name: </td>
+                        <td>{{ employee.bankname }}</td>
+                    </tr>
+                    <tr>
+                        <td> Employee Bank Branch: </td>
+                        <td>{{ employee.bankbranch }}</td>
+                    </tr> 
+                    <tr>
+                        <td> Employee Bank Account: </td>
+                        <td>{{ employee.bankaccount }}
+                        </td>
+                    </tr>                                    
+                </table>                                        
+            </div>
+        </div>
+    </div>   
+    <div class="card-header">
+        {% if request.user.is_superuser %}
+            <a href="/employees/edit/{{employee.id}}"><button>Edit</button></a>
+        {% endif %} 
+
+        <a href="../all/"><button>Back <span class="las la-arrow-right"></span></button></a>
+      
+    </div>
+      
+</main>
+
+{% endblock main %}
+
+
+ 

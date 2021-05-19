@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% extends "leave/leaves_pending.html" %}
+{% load static %}
+
+
+{% block title %}Approved Leave List{% endblock title %}
+
+{% block content %}
+
+    <div class="employee-grid">
+        <div class="projects">
+             {% for message in messages %}
+					<p id="messages">{{message}}</p>
+			{% endfor%}
+            <div class="card">
+                <div class="card-header">
+                <h3>Approved Leave List</h3>
+
+                <a href = "/leave/apply/"><button>Apply for Leave <span class="las la-edit"></span></button></a>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <td>User</td>    
+                                    <td>Duration</td>                                
+                                    <td> Type </td>
+                                    <td> Status</td>
+                                    <td> Actions</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% if request.user.is_superuser and request.user.is_staff %} 
+                                {% for leave in approved_leaves %}
+                                    <tr>                    
+                                        <td> {{leave.username}}</td>
+                                        <td> {{leave.leave_days}}</td>
+                                        <td> {{leave.leavetype}}</td>                                
+                                        <td> {{leave.status}}</td>  
+
+                                        <td> <a href="/leave/view/{{ leave.id }}" class = "btns"><button>VIEW</button></a></td>
+                                    
+                                    </tr>
+                                {% endfor%} 
+                            {% else %}
+                                  {% for approved in user_approved %}
+                                    <tr>                    
+                                        <td> {{approved.username}}</td>
+                                        <td> {{approved.leave_days}}</td>
+                                        <td> {{approved.leavetype}}</td>                                
+                                        <td> {{approved.status}}</td>  
+                                        
+                                        <td> <a href="/leave/view/{{ approved.id }}" class = "btns"><button>VIEW</button></a></td>
+                                    </tr>
+                                {% endfor%} 
+                            {% endif %} 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

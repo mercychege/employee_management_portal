@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block title %}Employee Creation{% endblock title %}
+
+{% block main %}
+<main>
+    <h1>Add Employee</h1>    
+{% if submitted %}
+    <p class="success">
+        New Employee has been created. Thank you.
+    </p>
+
+{% else %}   
+    <form action="" enctype="multipart/form-data" method="post" novalidate>
+        {% for message in messages %}
+			<p id="messages">{{message}}</p>
+	    {% endfor%}
+        <div class="wrap-collabsible"> 
+            <input id="collapsible" class="toggle" type="checkbox" checked="">
+            <label for="collapsible" class="lbl-toggle" tabindex="0">Personal Information</label>
+            <div class="collapsible-content">
+                <div class="content-inner">                  
+                    <table>                             
+                        <tr>
+                            
+                            <td>{{ form.employeenumber.label  }}</td>
+                            <td>{{ form.employeenumber }}</td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.username.label}}</td>
+                            <td>{{ form.username }}</td>
+                        </tr> 
+                       
+                        <tr>
+                            <td> {{ form.image.label}}</td>
+                            <td>{{ form.image }}&nbsp;
+                                {{form.image.errors}}
+
+                            </td>
+                        </tr> 
+                        <tr>                           
+                            <td> {{ form.firstname.label}}</td>
+                            <td>{{ form.firstname }} &nbsp;
+                                {{form.firstname.errors}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.lastname.label}}</td>
+                            <td>{{ form.lastname }}&nbsp;
+                                {{form.lastname.errors}}
+                            </td>
+                        </tr>  
+                        <tr>
+                            <td> {{ form.othername.label}}</td>
+                            <td>{{ form.othername }}</td>
+                        </tr> 
+                        <tr>
+                            <td> {{ form.gender.label}}</td>
+                            <td>{{ form.gender }}&nbsp;
+                                {{form.gender.errors}}
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td>{{ form.dateofbirth.label}}</td>
+                            <td>{{ form.dateofbirth }}&nbsp;
+                                {{form.dateofbirth.errors}}
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.maritalstatus.label}}</td>
+                            <td>{{ form.maritalstatus }}&nbsp;
+                                {{form.maritalstatus.errors}}
+                            </td>
+                        </tr>                        
+                    </table>  
+                </div>
+            </div>    
+        </div>	     
+        
+        <div class="wrap-collabsible"> 
+            <input id="collapsible2" class="toggle" type="checkbox"> 
+            <label for="collapsible2" class="lbl-toggle" tabindex="0">Contact Information</label>
+            <div class="collapsible-content">
+                <div class="content-inner"> 
+                    <table>                
+                    <tr>
+                        <td>{{ form.address.label }}</td>
+                        <td>{{ form.address }}</td>
+                    </tr>
+                    <tr>
+                        <td> {{ form.postcode.label}}</td>
+                        <td>{{ form.postcode }}</td>
+                    </tr> 
+                    <tr>
+                        <td> {{ form.currentresidence.label}}</td>
+                        <td>{{ form.currentresidence }}</td>
+                    </tr>
+                    <tr>
+                        <td> {{ form.phone.label}}</td>
+                        <td>{{ form.phone }}</td>
+                    </tr>
+                    <tr>
+                        <td> {{ form.email.label}}</td>
+                        <td>{{ form.email }}&nbsp;
+                            {{form.email.errors}}
+                        </td>
+                    </tr>
+                    </table>              
+                </div>
+            </div>
+        </div>
+        <div class="wrap-collabsible"> 
+            <input id="collapsible3" class="toggle" type="checkbox">
+            <label for="collapsible3" class="lbl-toggle" tabindex="0">Employment Information</label>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                    <table>                
+                        <tr>
+                            <td>{{ form.department.label }}</td>
+                            <td>{{ form.department }}&nbsp;
+                                {{form.department.errors}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.position.label}}</td>
+                            <td>{{ form.position }}&nbsp;
+                                {{form.position.errors}}
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td> {{ form.ID_No.label}}</td>
+                            <td>{{ form.ID_No }}</td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.Passport_No.label}}</td>
+                            <td>{{ form.Passport_No }}</td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.NSSF_No.label}}</td>
+                            <td>{{ form.NSSF_No }}</td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.NHIF_No.label}}</td>
+                            <td>{{ form.NHIF_No }}</td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.KRA_No.label}}</td>
+                            <td>{{ form.KRA_No }}</td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.employmentdate.label}}</td>
+                            <td>{{ form.employmentdate }}</td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.employmenttype.label}}</td>
+                            <td>{{ form.employmenttype }}&nbsp;
+                                {{form.employmenttype.errors}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.terminationdate.label}}</td>
+                            <td>{{ form.terminationdate }}</td>
+                        </tr>
+                    </table> 
+
+                    
+                </div>                      
+            </div>
+        </div>
+        <div class="wrap-collabsible"> 
+            <input id="collapsible4" class="toggle" type="checkbox">
+            <label for="collapsible4" class="lbl-toggle" tabindex="0">Bank Account Information</label>
+            <div class="collapsible-content">
+                <div class="content-inner">
+                    <table>                
+                        <tr>
+                            <td>{{ form.bankname.label }}</td>
+                            <td>{{ form.bankname }}&nbsp;
+                                {{form.bankname.errors}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.bankbranch.label}}</td>
+                            <td>{{ form.bankbranch }}</td>
+                        </tr> 
+                        <tr>
+                            <td> {{ form.bankaccount.label}}</td>
+                            <td>{{ form.bankaccount }}&nbsp;
+                                {{form.bankaccount.errors}}
+                            </td>
+                        </tr>                                    
+                    </table>                                        
+                </div>
+            </div>
+        </div>   
+        <div class="card-header">
+            <button type="submit">Submit</button>
+        </div>
+         
+        {% csrf_token %}
+    </form> 
+    
+
+{% endif %}
+
+ 
+</main>
+
+{% endblock main %}
+
+
+ 

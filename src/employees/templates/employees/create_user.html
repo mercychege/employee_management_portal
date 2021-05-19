@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block title %}User Creation{% endblock title %}
+
+{% block main %}
+<main>
+    <h1>Create New User</h1>    
+{% if submitted %}
+    <p class="success">
+        New User has been created. Thank you.
+    </p>
+
+{% else %}   
+    <form action="" enctype="multipart/form-data" method="post" novalidate>
+        {% for message in messages %}
+			<p id="messages">{{message}}</p>
+	    {% endfor%}
+        <div class="wrap-collabsible"> 
+            <input id="collapsible" class="toggle" type="checkbox" checked="">
+            <label for="collapsible" class="lbl-toggle" tabindex="0">User Information</label>
+            <div class="collapsible-content">
+                <div class="content-inner">                  
+                    <table>                             
+                        <tr>
+                            
+                            <td>{{ form.username.label  }}</td>
+                            <td>{{ form.username }}&nbsp;
+								{{ form.username.errors }}
+							</td>
+                        </tr>
+                        <tr>
+                            <td> {{ form.email.label}}</td>
+                            <td>{{ form.email }}&nbsp;
+								{{ form.email.errors }}
+							</td>
+                        </tr>                        
+                        <tr>
+                            <td> {{ form.password1.label}}</td>
+                            <td>{{ form.password1 }}&nbsp;
+                                {{form.password1.errors}}
+                            </td>
+                        </tr>  
+						 <tr>
+                            <td> {{ form.password2.label}}</td>
+                            <td>{{ form.password2 }}&nbsp;
+                                {{form.password2.errors}}
+                            </td>
+                        </tr> 
+                                               
+                    </table> 
+					
+                </div>
+            </div>    
+        </div>	            
+        <div class="card-header">
+            <button type="submit">Submit</button>
+        </div>
+         
+        {% csrf_token %}
+    </form> 
+    
+
+{% endif %}
+
+</main>
+
+	<script>						
+		//We start indexing at one because CSRF_token is considered and input field 
+		//Query All input fields
+		var form_fields = document.getElementsByTagName('input')
+		form_fields[2].placeholder='Username..';
+		form_fields[3].placeholder='Email..';
+		form_fields[4].placeholder='Enter password...';
+		form_fields[5].placeholder='Re-enter Password...';
+
+
+		for (var field in form_fields){	
+			form_fields[field].className += ' form-control'
+		}
+	</script>
+
+{% endblock main %}
+
+
+ 

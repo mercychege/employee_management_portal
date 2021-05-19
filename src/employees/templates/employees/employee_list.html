@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block title %}Employee Register{% endblock title %}
+
+{% block main %}
+    <main>
+      <div class="cards">
+                {% if request.user.is_superuser and request.user.is_staff %}                
+                <div class="card-info">
+                    <a href="/employees/all" class="active">                   
+                    <div>
+                       <h1>{{all_employees.count}}</h1> 
+                       <span>All Employees</span>
+                    </div>
+                    <div>
+                        <span class="las la-users"></span>
+                    </div>
+                    </a>
+                </div> 
+                <div class="card-info">
+                    <a href="/employees/add/">
+                    <div>
+                        <h1>+1</h1> 
+                        <span>Add Employees</span>
+                    </div>
+                    <div>                    
+                        <span class="las la-user-plus"></span>
+                    </div>
+                    </a>
+                </div>   
+                <div class="card-info">
+                    <a href="" >
+                    <div>
+                        <h1>{{active_employees.count}}</h1> 
+                        <span>Active Employees</span>
+                    </div>
+                    <div>
+                        <span class="las la-user-check"></span>
+                    </div>
+                    </a>
+                </div>
+                <div class="card-info">
+                    <a href="">
+                    <div>
+                        <h1>{{inactive_employees.count}}</h1> 
+                        <span>Inactive Employees</span>
+                    </div>
+                    <div>
+                        <span class="las la-user-times"></span>
+                    </div>
+                    </a>
+                </div>
+                
+                {% else %}  
+                <div class="card-info">                    
+                    <a href="/employees/profile" >
+                    <div>                        
+                        <h1>1</h1> 
+                        <span>User Profile</span>
+                    </div>
+                    <div>
+                        <span class="las la-user-circle"></span>
+                    </div>
+                    </a>
+                </div>              
+                <div class="card-info">                    
+                    <a href="leave/pending/all" >
+                    <div>                        
+                        <h1>{{staff_leaves.count}}</h1> 
+                        <span>Leave Applications</span>
+                    </div>
+                    <div>
+                        <span class="las la-file-alt"></span>
+                    </div>
+                    </a>
+                </div>
+                <div class="card-info">
+                     <a href="/employees/birthdays">
+                    <div>
+                        <h1>{{employees_birthday.count}}</h1> 
+                        <span>Birthdays</span>
+                    </div>
+                    <div>
+                        <span class="las la-gift"></span>
+                    </div>
+                    </a>
+                </div>
+                <div class="card-info">
+                    <a href="">
+                    <div>
+                        <h1>Ksh.1M</h1> 
+                        <span>Net Income</span>
+                    </div>
+                    <div>                    
+                        <span class="las la-money-bill-wave"></span>
+                    </div>
+                    </a>
+                </div>
+                {% endif %}
+        </div>
+        <div class="employee-grid">
+            <div class="projects">            
+                <div class="card">         
+                    <div class="card-header"> 
+                        <h2>Employee Register</h2>
+                        <button>See all <span class="las la-arrow-right"></span></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Employee Number</td>
+                                        <td>First Name</td>
+                                        <td>Last Name</td>                                
+                                        <td>Position</td>                                
+                                        <td> Status </td>
+                                        <td> Actions</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for employee in all_employees %}
+                                    <tr>                    
+                                        <td> {{employee.employeenumber}}</td>
+                                        <td> {{employee.firstname}}</td>
+                                        <td> {{employee.lastname}}</td>                                
+                                        <td> {{employee.position}}</td>  
+                                        <td> 
+                                        {% if employee.is_blocked %}  
+                                            Inactive
+                                        {% else %}
+                                            Active
+                                        {% endif %}
+                                        </td>
+                                        <td> <a href="/employees/view/{{ employee.id }}" class= "btns"><button>VIEW | EDIT</button></a></td>
+                                         
+                                    </tr>
+                                    {% endfor%}  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>        
+{% endblock main %}

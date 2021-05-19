@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block title %}Leave List{% endblock title %}
+
+{% block main %}
+<main>
+      <div class="cards">
+                {% if request.user.is_superuser and request.user.is_staff %}                
+                <div class="card-info">
+                    <a href="/leave/pending/all/" class="active">
+                    <div>
+                        <h1>{{pending_leaves.count}}</h1> 
+                        <span>Pending Applications</span>
+                    </div>
+                    <div>
+                        <span class="las la-file-alt"></span>
+                    </div>
+                    </a>
+                </div>                 
+                <div class="card-info">
+                    <a href="/leave/approved/all/">
+                    <div>
+                        <h1>{{approved_leaves.count}}</h1> 
+                        <span>Approved Applications</span>
+                    </div>
+                    <div>                   
+                        <span class="las la-check-circle"></span>
+                    </div>
+                    </a>
+                </div>
+                 <div class="card-info">
+                    <a href="/leave/cancelled/all/">
+                    <div>
+                        <h1>{{cancelled_leaves.count}}</h1> 
+                        <span>Cancelled Applications</span>
+                    </div>
+                    <div>                   
+                        <span class="las la-times-circle"></span>
+                    </div>
+                    </a>
+                </div>
+                <div class="card-info">
+                    <a href="/leave/rejected/all/">
+                    <div>
+                        <h1>{{rejected_leaves.count}}</h1> 
+                        <span>Rejected Applications</span>
+                    </div>
+                    <div>
+                        <span class="las la-ban"></span>
+                    </div>
+                    </a>
+                </div>
+                {% else %}
+                <div class="card-info">
+                    <a href="/leave/pending/all/" class="active">                   
+                    <div>
+                       <h1>{{user_pending.count}}</h1> 
+                       <span>Pending Applications</span>
+                    </div>
+                    <div>
+                        <span class="las la-file-alt"></span>
+                    </div>
+                    </a>
+                </div>  
+                <div class="card-info">
+                    <a href="/leave/approved/all/">
+                    <div>
+                        <h1>{{user_approved.count}}</h1> 
+                        <span>Approved Applications</span>
+                    </div>
+                    <div>                   
+                        <span class="las la-check-circle"></span>
+                    </div>
+                    </a>
+                </div>
+                 <div class="card-info">
+                    <a href="/leave/cancelled/all/">
+                    <div>
+                        <h1>{{user_cancelled.count}}</h1> 
+                        <span>Cancelled Applications</span>
+                    </div>
+                    <div>                   
+                        <span class="las la-times-circle"></span>
+                    </div>
+                    </a>
+                </div>
+                <div class="card-info">
+                    <a href="/leave/rejected/all/">
+                    <div>
+                        <h1>{{user_rejected.count}}</h1> 
+                        <span>Rejected Applications</span>
+                    </div>
+                    <div>
+                        <span class="las la-ban"></span>
+                    </div>
+                    </a>
+                </div>
+                {% endif %}
+        </div>
+    {%block content%}    
+    <div class="employee-grid">
+        <div class="projects">
+            {% for message in messages %}
+					<p id="messages">{{message}}</p>
+			{% endfor%}
+            <div class="card">
+                <div class="card-header">
+                <h3>Pending Leave List</h3>
+                <a href = "/leave/apply/"><button>Apply for Leave <span class="las la-edit"></span></button></a>
+               
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table width="100%">
+                            <thead>
+                                <tr>
+                                    <td>User</td>    
+                                    <td>Duration</td>                                
+                                    <td> Type </td>
+                                    <td> Status</td>
+                                    <td> Actions</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% if request.user.is_superuser and request.user.is_staff %} 
+                                {% for leave in pending_leaves %}
+                                    <tr>                    
+                                        <td> {{leave.username}}</td>
+                                        <td> {{leave.leave_days}}</td>
+                                        <td> {{leave.leavetype}}</td>                                
+                                        <td> {{leave.status}}</td>  
+                                        
+                                        <td> <a href="/leave/view/{{ leave.id }}" class = "btns"><button>VIEW</button></a></td>
+                                    </tr>
+                                {% endfor%} 
+                            {% else %}
+                                  {% for pending in user_pending %}
+                                    <tr>                    
+                                        <td> {{pending.username}}</td>
+                                        <td> {{pending.leave_days}}</td>
+                                        <td> {{pending.leavetype}}</td>                                
+                                        <td> {{pending.status}}</td>  
+                                        
+                                        <td> <a href="/leave/view/{{ pending.id }}" class = "btns"><button>VIEW</button></a></td>
+                                    </tr>
+                                {% endfor%} 
+                            {% endif %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content%}
+    </main>
+{% endblock main %}

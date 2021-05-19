@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% extends "index.html" %}
+{% load static %}
+
+
+{% block title %}Position List{% endblock title %}
+
+{% block main %}
+    <main>
+      <div class="cards">                             
+                <div class="card-info">
+                    <a href="/employees/departments" >                   
+                    <div>
+                       <h1>{{all_departments.count}}</h1> 
+                       <span>All Departments</span>
+                    </div>
+                    <div>
+                        <span class="las la-sitemap"></span>
+                    </div>
+                    </a>
+                </div> 
+                <div class="card-info">
+                    <a href="/employees/departments/add">
+                    <div>
+                        <h1>+1</h1> 
+                        <span>Add Departments</span>
+                    </div>
+                    <div>                    
+                        <span class="las la-user-plus"></span>
+                    </div>
+                    </a>
+                </div>   
+                <div class="card-info">
+                    <a href="/employees/positions" class="active">                   
+                    <div>
+                       <h1>{{all_positions.count}}</h1> 
+                       <span>All Positions</span>
+                    </div>
+                    <div>
+                        <span class="las la-user-graduate"></span>
+                    </div>
+                    </a>
+                </div> 
+                <div class="card-info">
+                    <a href="/employees/positions/add">
+                    <div>
+                        <h1>+1</h1> 
+                        <span>Add Positions</span>
+                    </div>
+                    <div>                    
+                        <span class="las la-user-plus"></span>
+                    </div>
+                    </a>
+                </div>                 
+        </div>
+        <div class="employee-grid">
+            <div class="projects">            
+                <div class="card">         
+                    <div class="card-header"> 
+                        <h2>Position List</h2>
+                        <button>See all <span class="las la-arrow-right"></span></button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>Position id</td>
+                                        <td>Department</td>
+                                        <td> Position</td>
+                                        
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% for position in all_positions %}
+                                    <tr>                    
+                                        <td> {{position.id}}</td>
+                                        <td> {{position.department}}</td>
+                                        <td> {{position.name}}</td>
+                                        
+                                   
+                                    </tr>
+                                    {% endfor%}  
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>        
+{% endblock main %}
